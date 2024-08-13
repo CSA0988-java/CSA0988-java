@@ -1,0 +1,51 @@
+import java.util.Scanner;
+
+public class BMICalculator {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        // Prompt user for height and weight
+        System.out.print("Enter height (in inches): ");
+        float heightInInches = scanner.nextFloat();
+        System.out.print("Enter weight (in pounds): ");
+        float weightInPounds = scanner.nextFloat();
+
+        // Convert height to meters and weight to kilograms
+        float heightInMeters = heightInInches * 0.0254f;
+        float weightInKilograms = weightInPounds * 0.453592f;
+
+        // Calculate BMI
+        float bmi = weightInKilograms / (heightInMeters * heightInMeters);
+
+        // Determine BMI category
+        String category;
+        if (bmi <= 16.00) {
+            category = "Starvation";
+        } else if (bmi <= 16.99) {
+            category = "Emaciation";
+        } else if (bmi <= 18.49) {
+            category = "Underweight";
+        } else if (bmi <= 22.99) {
+            category = "Normal, Low Range";
+        } else if (bmi <= 24.99) {
+            category = "Normal, High Range";
+        } else if (bmi <= 27.49) {
+            category = "Overweight, Low Range";
+        } else if (bmi <= 29.99) {
+            category = "Overweight, High Range";
+        } else if (bmi <= 34.99) {
+            category = "1st Degree Obesity";
+        } else if (bmi <= 39.99) {
+            category = "2nd Degree Obesity";
+        } else {
+            category = "3rd Degree Obesity";
+        }
+
+        // Print results
+        System.out.printf("BMI: %.2f\n", bmi);
+        System.out.println("Category: " + category);
+
+        scanner.close();
+    }
+}
