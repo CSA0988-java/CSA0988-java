@@ -1,0 +1,28 @@
+import java.util.Random;
+
+public class MinMaxFinder {
+
+    public static void main(String[] args) {
+        Random random = new Random();
+        int count = 0;
+        int largest = Integer.MIN_VALUE;
+        int smallest = Integer.MAX_VALUE;
+
+        while (count < 10) {
+            int number = random.nextInt(100) + 1; // Random number between 1 and 100
+            System.out.println("Generated number: " + number);
+
+            if (number > largest) {
+                largest = number;
+            }
+            if (number < smallest) {
+                smallest = number;
+            }
+
+            count++;
+        }
+
+        System.out.println("Largest number: " + largest);
+        System.out.println("Smallest number: " + smallest);
+    }
+}
