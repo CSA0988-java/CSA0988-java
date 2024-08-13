@@ -1,0 +1,114 @@
+// Base class Vehicle
+abstract class Vehicle {
+    protected String make, model, fuelType;
+    protected int year;
+
+    public Vehicle(String make, String model, int year, String fuelType) {
+        this.make = make;
+        this.model = model;
+        this.year = year;
+        this.fuelType = fuelType;
+    }
+
+    public abstract double getFuelEfficiency();
+    public abstract double getDistance(double fuel);
+    public abstract double getMaxSpeed();
+
+    @Override
+    public String toString() {
+        return String.format("%d %s %s (%s)", year, make, model, fuelType);
+    }
+}
+
+// Truck class
+class Truck extends Vehicle {
+    private double loadCapacity; // tons
+
+    public Truck(String make, String model, int year, String fuelType, double loadCapacity) {
+        super(make, model, year, fuelType);
+        this.loadCapacity = loadCapacity;
+    }
+
+    @Override
+    public double getFuelEfficiency() {
+        return 15.0 - loadCapacity; // Example
+    }
+
+    @Override
+    public double getDistance(double fuel) {
+        return getFuelEfficiency() * fuel;
+    }
+
+    @Override
+    public double getMaxSpeed() {
+        return 120.0 - loadCapacity * 2; // Example
+    }
+}
+
+// Car class
+class Car extends Vehicle {
+    private int doors;
+
+    public Car(String make, String model, int year, String fuelType, int doors) {
+        super(make, model, year, fuelType);
+        this.doors = doors;
+    }
+
+    @Override
+    public double getFuelEfficiency() {
+        return 25.0 + doors * 0.5; // Example
+    }
+
+    @Override
+    public double getDistance(double fuel) {
+        return getFuelEfficiency() * fuel;
+    }
+
+    @Override
+    public double getMaxSpeed() {
+        return 180.0 - doors * 2; // Example
+    }
+}
+
+// Motorcycle class
+class Motorcycle extends Vehicle {
+    private boolean hasSidecar;
+
+    public Motorcycle(String make, String model, int year, String fuelType, boolean hasSidecar) {
+        super(make, model, year, fuelType);
+        this.hasSidecar = hasSidecar;
+    }
+
+    @Override
+    public double getFuelEfficiency() {
+        return hasSidecar ? 40.0 - 5.0 : 45.0; // Example
+    }
+
+    @Override
+    public double getDistance(double fuel) {
+        return getFuelEfficiency() * fuel;
+    }
+
+    @Override
+    public double getMaxSpeed() {
+        return hasSidecar ? 160.0 - 10.0 : 170.0; // Example
+    }
+}
+
+// Main class
+public class Main {
+    public static void main(String[] args) {
+        Vehicle[] vehicles = {
+            new Truck("Ford", "F-150", 2023, "Diesel", 3.0),
+            new Car("Toyota", "Camry", 2022, "Gasoline", 4),
+            new Motorcycle("Harley-Davidson", "Sportster", 2021, "Gasoline", false)
+        };
+
+        for (Vehicle v : vehicles) {
+            System.out.println(v);
+            System.out.println("Fuel Efficiency: " + v.getFuelEfficiency() + " mpg");
+            System.out.println("Distance with 10 gallons: " + v.getDistance(10) + " miles");
+            System.out.println("Max Speed: " + v.getMaxSpeed() + " mph\n");
+        }
+    }
+}
