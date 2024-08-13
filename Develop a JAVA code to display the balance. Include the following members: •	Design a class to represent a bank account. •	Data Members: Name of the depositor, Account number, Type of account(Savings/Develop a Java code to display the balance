@@ -1,0 +1,59 @@
+import java.util.Scanner;
+
+class BankAccount {
+    private String depositorName;
+    private int accountNumber;
+    private String accountType;
+    private double balance;
+    private static final double MIN_BALANCE = 500.00;
+
+    public BankAccount(String name, int accNumber, String type, double initBalance) {
+        depositorName = name;
+        accountNumber = accNumber;
+        accountType = type;
+        balance = Math.max(initBalance, MIN_BALANCE);
+    }
+
+    public void deposit(double amount) {
+        if (amount > 0) balance += amount;
+    }
+
+    public void withdraw(double amount) {
+        if (amount > 0 && balance - amount >= MIN_BALANCE) balance -= amount;
+    }
+
+    public void displayBalance() {
+        System.out.println("Account Balance: ₹" + balance);
+    }
+}
+
+public class BankApp {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter depositor name: ");
+        String name = sc.nextLine();
+
+        System.out.print("Enter account number: ");
+        int accNumber = sc.nextInt();
+
+        sc.nextLine(); // Consume newline
+
+        System.out.print("Enter account type: ");
+        String type = sc.nextLine();
+
+        System.out.print("Enter initial balance: ₹");
+        double initBalance = sc.nextDouble();
+
+        BankAccount account = new BankAccount(name, accNumber, type, initBalance);
+
+        System.out.print("Enter amount to deposit: ₹");
+        account.deposit(sc.nextDouble());
+
+        System.out.print("Enter amount to withdraw: ₹");
+        account.withdraw(sc.nextDouble());
+
+        account.displayBalance();
+        sc.close();
+    }
+}
