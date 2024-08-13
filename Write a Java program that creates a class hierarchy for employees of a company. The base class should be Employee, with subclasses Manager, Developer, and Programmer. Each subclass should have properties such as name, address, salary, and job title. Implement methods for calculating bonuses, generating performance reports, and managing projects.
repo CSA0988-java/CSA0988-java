@@ -1,0 +1,105 @@
+// Base class Employee
+abstract class Employee {
+    protected String name, address, jobTitle;
+    protected double salary;
+
+    public Employee(String name, String address, String jobTitle, double salary) {
+        this.name = name;
+        this.address = address;
+        this.jobTitle = jobTitle;
+        this.salary = salary;
+    }
+
+    public abstract double calculateBonus();
+    public abstract String generatePerformanceReport();
+    public abstract String manageProjects();
+
+    @Override
+    public String toString() {
+        return String.format("%s (%s)\nAddress: %s\nSalary: $%.2f\n", name, jobTitle, address, salary);
+    }
+}
+
+// Manager class
+class Manager extends Employee {
+    public Manager(String name, String address, double salary) {
+        super(name, address, "Manager", salary);
+    }
+
+    @Override
+    public double calculateBonus() {
+        return salary * 0.10; // Example bonus calculation
+    }
+
+    @Override
+    public String generatePerformanceReport() {
+        return "Manager Performance Report: Oversees team and ensures project success.";
+    }
+
+    @Override
+    public String manageProjects() {
+        return "Managing multiple projects and coordinating with different teams.";
+    }
+}
+
+// Developer class
+class Developer extends Employee {
+    public Developer(String name, String address, double salary) {
+        super(name, address, "Developer", salary);
+    }
+
+    @Override
+    public double calculateBonus() {
+        return salary * 0.08; // Example bonus calculation
+    }
+
+    @Override
+    public String generatePerformanceReport() {
+        return "Developer Performance Report: Focuses on coding and bug fixing.";
+    }
+
+    @Override
+    public String manageProjects() {
+        return "Working on specific development tasks and contributing to codebase.";
+    }
+}
+
+// Programmer class
+class Programmer extends Employee {
+    public Programmer(String name, String address, double salary) {
+        super(name, address, "Programmer", salary);
+    }
+
+    @Override
+    public double calculateBonus() {
+        return salary * 0.05; // Example bonus calculation
+    }
+
+    @Override
+    public String generatePerformanceReport() {
+        return "Programmer Performance Report: Responsible for writing and testing code.";
+    }
+
+    @Override
+    public String manageProjects() {
+        return "Contributing to project development and collaborating with team members.";
+    }
+}
+
+// Main class to test the Employee hierarchy
+public class Main {
+    public static void main(String[] args) {
+        Employee[] employees = {
+            new Manager("Alice Smith", "123 Elm St", 80000),
+            new Developer("Bob Johnson", "456 Oak St", 70000),
+            new Programmer("Charlie Brown", "789 Pine St", 60000)
+        };
+
+        for (Employee e : employees) {
+            System.out.println(e);
+            System.out.println("Bonus: $" + e.calculateBonus());
+            System.out.println("Performance Report: " + e.generatePerformanceReport());
+            System.out.println("Project Management: " + e.manageProjects() + "\n");
+        }
+    }
+}
